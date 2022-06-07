@@ -23,14 +23,15 @@ def get_weather(city,OW_token):
         data = r.json()
         #pprint(data)
 
-        weather_description = data["weather"]["main"]
+        city = data["name"]
+        cur_temp = data["main"]["temp"]
+
+        weather_description = data["weather"][0]["main"]
         if weather_description in code_to_smile:
             wd = code_to_smile[weather_description]
         else:
             wd = "Посмотри в окно"
 
-        city = data["name"]
-        cur_temp = data["main"]["temp"]
         humid = data["main"]["humidity"]
         wind = data["wind"]["speed"]
         sunrise_time = datetime.datetime.fromtimestamp(data["sys"]["sunrise"])
